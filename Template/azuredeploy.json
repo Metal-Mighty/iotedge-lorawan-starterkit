@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.22.6.54827",
-      "templateHash": "11434623448491979162"
+      "version": "0.26.170.59819",
+      "templateHash": "8901527967957168331"
     }
   },
   "parameters": {
@@ -107,7 +107,7 @@
     },
     "version": {
       "type": "string",
-      "defaultValue": "2.2.2",
+      "defaultValue": "2.2.23",
       "metadata": {
         "description": "The LoRaWAN Starter Kit version to use."
       }
@@ -144,8 +144,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.22.6.54827",
-              "templateHash": "3401594812311343473"
+              "version": "0.26.170.59819",
+              "templateHash": "4406886964679467929"
             }
           },
           "parameters": {
@@ -203,8 +203,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.22.6.54827",
-              "templateHash": "2290328540893640608"
+              "version": "0.26.170.59819",
+              "templateHash": "12682578182798757700"
             }
           },
           "parameters": {
@@ -281,8 +281,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.22.6.54827",
-              "templateHash": "18306563337347370909"
+              "version": "0.26.170.59819",
+              "templateHash": "6446068394986242796"
             }
           },
           "parameters": {
@@ -373,8 +373,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.22.6.54827",
-              "templateHash": "7712596626075070622"
+              "version": "0.26.170.59819",
+              "templateHash": "10876830084289450946"
             }
           },
           "parameters": {
@@ -567,8 +567,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.22.6.54827",
-              "templateHash": "2957569720945738904"
+              "version": "0.26.170.59819",
+              "templateHash": "200091648131379261"
             }
           },
           "parameters": {
@@ -645,8 +645,8 @@
                   "metadata": {
                     "_generator": {
                       "name": "bicep",
-                      "version": "0.22.6.54827",
-                      "templateHash": "4565020005675261292"
+                      "version": "0.26.170.59819",
+                      "templateHash": "15979896914498320375"
                     }
                   },
                   "parameters": {
@@ -711,8 +711,8 @@
                   "metadata": {
                     "_generator": {
                       "name": "bicep",
-                      "version": "0.22.6.54827",
-                      "templateHash": "10169398803768460939"
+                      "version": "0.26.170.59819",
+                      "templateHash": "8944655127419665774"
                     }
                   },
                   "parameters": {
@@ -1081,8 +1081,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.22.6.54827",
-              "templateHash": "3615875151356609259"
+              "version": "0.26.170.59819",
+              "templateHash": "8004423485616138915"
             }
           },
           "parameters": {
@@ -1245,8 +1245,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.22.6.54827",
-              "templateHash": "5039673451284488858"
+              "version": "0.26.170.59819",
+              "templateHash": "46906872022834320"
             }
           },
           "parameters": {
