@@ -38,8 +38,8 @@ jobs:
           registry: ghcr.io
       - name: Build and push images
         run: |
-          docker buildx build -f "./LoRaEngine/modules/LoRaWanNetworkSrvModule/Dockerfile.${{ matrix.image }}" -t $DOCKERHUB_ORGANISATION/lorawannetworksrvmodule:$VERSION-${{ matrix.image }} --output type=image,push=true "."
-          docker buildx build -f "./LoRaEngine/modules/LoRaBasicsStationModule/Dockerfile.${{ matrix.image }}" -t $DOCKERHUB_ORGANISATION/lorabasicsstationmodule:$VERSION-${{ matrix.image }} --build-arg CONTAINER_REGISTRY_ADDRESS=ghcr.io --output type=image,push=true "."
+          docker buildx build -f "./LoRaEngine/modules/LoRaWanNetworkSrvModule/Dockerfile.${{ matrix.image }}" -t $DOCKERHUB_ORGANISATION/lorawannetworksrvmodule:$VERSION-${{ matrix.image }} --push .
+          docker buildx build -f "./LoRaEngine/modules/LoRaBasicsStationModule/Dockerfile.${{ matrix.image }}" -t $DOCKERHUB_ORGANISATION/lorabasicsstationmodule:$VERSION-${{ matrix.image }} --push .
     env:
       DOCKERHUB_ORGANISATION: ${{ secrets.DOCKER_REPOSITORY }}
   
