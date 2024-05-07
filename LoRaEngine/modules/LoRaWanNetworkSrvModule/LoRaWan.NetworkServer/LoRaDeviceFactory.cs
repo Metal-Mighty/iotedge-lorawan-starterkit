@@ -152,19 +152,6 @@ namespace LoRaWan.NetworkServer
                 // Enabling AMQP multiplexing
                 var transportSettings = new ITransportSettings[]
                 {
-                    new AmqpTransportSettings(TransportType.Amqp_Tcp_Only)
-                    {
-                        AmqpConnectionPoolSettings = new AmqpConnectionPoolSettings()
-                        {
-                            Pooling = true,
-                            // pool size for this project defaults to 1, allowing aroung 1000 amqp links
-                            // in case you need more, and the communications are proxied through edgeHub,
-                            // please consider changing this parameter in edgeHub configuration too
-                            // https://github.com/Azure/iotedge/blob/e6d52d6f6b0eb76e7ef250f3fcdeaf38e467ab4f/doc/EnvironmentVariables.md
-                            MaxPoolSize = this.configuration.IotHubConnectionPoolSize
-                        },
-                        OperationTimeout = TimeSpan.FromSeconds(10)
-                    },
                     new AmqpTransportSettings(TransportType.Amqp_WebSocket_Only)
                     {
                         AmqpConnectionPoolSettings = new AmqpConnectionPoolSettings()
