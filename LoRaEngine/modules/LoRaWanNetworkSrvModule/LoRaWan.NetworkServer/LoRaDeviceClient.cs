@@ -102,11 +102,18 @@ namespace LoRaWan.NetworkServer
 
                 this.logger.LogDebug("updating twin");
                 using var updateReportedPropertiesOperation = this.tracing.TrackIotHubDependency(UpdateReportedPropertiesDependencyName, this.deviceIdTracingData);
-
-                await this.deviceClient.UpdateReportedPropertiesAsync(reportedProperties, cancellationToken);
-
+                
+                this.logger.LogInformation("updateReportedPropertiesOperation OK");
+                this.logger.LogInformation("Start updating properties");
+                var updated = this.deviceClient.UpdateReportedPropertiesAsync(reportedProperties, cancellationToken).WaitAsync(new TimeSpan(0,0,0,0,10000), cancellationToken).IsFaulted;
+                
+                if (!updated)
+                    this.logger.LogInformation("Properties updated");
+                else
+                    this.logger.LogInformation("Properties not updated");
+                
                 this.logger.LogDebug("twin updated");
-
+                
                 return true;
             }
             catch (IotHubCommunicationException ex) when (ex.InnerException is OperationCanceledException &&
