@@ -105,13 +105,13 @@ namespace LoRaWan.NetworkServer
 
                 this.logger.LogInformation("updateReportedPropertiesOperation OK");
                 this.logger.LogInformation("Start updating properties");
-                var updateTask = this.deviceClient.UpdateReportedPropertiesAsync(reportedProperties, cancellationToken).WaitAsync(new TimeSpan(0, 0, 0, 0, 10000), cancellationToken);
+                var updateTask = this.deviceClient.UpdateReportedPropertiesAsync(reportedProperties, cancellationToken).WaitAsync(TimeSpan.FromSeconds(60), cancellationToken);
                 await updateTask;
 
                 if (!updateTask.IsFaulted)
                     this.logger.LogInformation("Properties updated");
                 else
-                    this.logger.LogInformation("Properties not updated");
+                    this.logger.LogError("Properties not updated");
 
                 this.logger.LogDebug("twin updated");
 
