@@ -11,6 +11,7 @@ namespace LoRaWan.NetworkServer.BasicsStation
     using LoRaTools.Regions;
     using LoRaTools.Utils;
     using LoRaWan.NetworkServer.BasicsStation.JsonHandlers;
+    using Microsoft.Azure.Devices.Common.Exceptions;
     using Microsoft.Azure.Devices.Shared;
     using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Logging;
