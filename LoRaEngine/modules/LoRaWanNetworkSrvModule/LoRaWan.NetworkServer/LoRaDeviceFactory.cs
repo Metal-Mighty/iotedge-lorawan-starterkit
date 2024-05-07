@@ -171,7 +171,8 @@ namespace LoRaWan.NetworkServer
                         {
                             Pooling = true,
                             MaxPoolSize = this.configuration.IotHubConnectionPoolSize
-                        }
+                        },
+                        OperationTimeout = TimeSpan.FromSeconds(10)
                     }
                 };
 
