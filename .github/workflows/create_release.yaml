@@ -13,12 +13,6 @@ env:
 
 jobs:
   BuildAndPushDockerImages:
-    strategy:
-      matrix:
-        image:
-          - amd64
-          - arm32v7
-          - arm64v8
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -62,11 +56,6 @@ jobs:
             BUILD_VERSION=${{ inputs.releaseVersion }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
           tags: ghcr.io/metal-mighty/iotedge-lorawan-starterkit/lorawannetworksrvmodule:${{ inputs.releaseVersion }}
-            
-      # - name: Build and push images
-      #   run: |
-      #     docker buildx build -f "./LoRaEngine/modules/LoRaWanNetworkSrvModule/Dockerfile.${{ matrix.image }}" -t $DOCKERHUB_ORGANISATION/lorawannetworksrvmodule:$VERSION-${{ matrix.image }} --push .
-      #     docker buildx build -f "./LoRaEngine/modules/LoRaBasicsStationModule/Dockerfile.${{ matrix.image }}" -t $DOCKERHUB_ORGANISATION/lorabasicsstationmodule:$VERSION-${{ matrix.image }} --push .
     env:
       DOCKERHUB_ORGANISATION: ${{ secrets.DOCKER_REPOSITORY }}
   
