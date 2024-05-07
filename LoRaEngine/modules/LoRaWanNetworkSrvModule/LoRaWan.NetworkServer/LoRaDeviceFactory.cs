@@ -164,6 +164,14 @@ namespace LoRaWan.NetworkServer
                             MaxPoolSize = this.configuration.IotHubConnectionPoolSize
                         },
                         OperationTimeout = TimeSpan.FromSeconds(10)
+                    },
+                    new AmqpTransportSettings(TransportType.Amqp_WebSocket_Only)
+                    {
+                        AmqpConnectionPoolSettings = new AmqpConnectionPoolSettings()
+                        {
+                            Pooling = true,
+                            MaxPoolSize = this.configuration.IotHubConnectionPoolSize
+                        }
                     }
                 };
 
