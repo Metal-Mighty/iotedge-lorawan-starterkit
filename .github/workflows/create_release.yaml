@@ -49,7 +49,7 @@ jobs:
         with:
           # Build's context is the set of files located in the specified PATH or URL
           context: .
-          file: "./LoRaEngine/modules/LoRaWanNetworkSrvModule/Dockerfile.${{ matrix.image }}"
+          file: "./LoRaEngine/modules/LoRaWanNetworkSrvModule/Dockerfile.amd64"
           # Push is a shorthand for --output=type=registry
           push: true
           build-args: | 
