@@ -187,6 +187,9 @@ namespace LoRaWan.NetworkServer
                 return default;
             }
 
+            this.logger.LogInformation($"Device information received");
+            this.logger.LogInformation($"Response: { await response.Content.ReadAsStringAsync()}");
+
             return await response.Content.ReadAsStringAsync() is { Length: > 0 } json
                    && JsonDocument.Parse(json).RootElement is { ValueKind: JsonValueKind.Object } root
                    && root.EnumerateObject()
