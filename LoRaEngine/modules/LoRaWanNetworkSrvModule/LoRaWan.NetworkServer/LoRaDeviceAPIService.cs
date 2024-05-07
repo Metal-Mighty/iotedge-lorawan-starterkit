@@ -180,6 +180,8 @@ namespace LoRaWan.NetworkServer
             {
                 if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
+                    this.logger.LogError($"Device {eui} not found");
+                    this.logger.LogInformation($"Response: {await response.Content.ReadAsStringAsync()}");
                     return default;
                 }
 
