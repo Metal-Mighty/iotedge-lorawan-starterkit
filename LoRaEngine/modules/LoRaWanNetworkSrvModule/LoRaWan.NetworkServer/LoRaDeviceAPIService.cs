@@ -195,7 +195,7 @@ namespace LoRaWan.NetworkServer
                    && root.EnumerateObject()
                           .FirstOrDefault(p => PrimaryKeyPropertyName.Equals(p.Name, StringComparison.OrdinalIgnoreCase)) is { Value.ValueKind: JsonValueKind.String } property
                    ? property.Value.GetString()
-                   : null;
+                   : throw new DeviceNotFoundException($"Message not found, response: {Environment.NewLine}{await response.Content.ReadAsStringAsync()}");
         }
 
         internal Uri GetFullUri(string relativePath)
