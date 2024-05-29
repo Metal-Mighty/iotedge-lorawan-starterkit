@@ -6,7 +6,9 @@ namespace LoRaWan.NetworkServer
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.Metrics;
+    using System.Net.Http;
     using System.Text;
+    using System.Text.Json.Nodes;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Azure.Devices.Client;
@@ -38,13 +40,17 @@ namespace LoRaWan.NetworkServer
         private readonly ITracing tracing;
         private readonly Counter<int> twinLoadRequests;
         private DeviceClient deviceClient;
+        private readonly NetworkServerConfiguration networkServerConfiguration;
+        private readonly IHttpClientFactory httpClientFactory;
 
         public LoRaDeviceClient(string deviceId,
                                 string connectionString,
                                 ITransportSettings[] transportSettings,
                                 ILogger<LoRaDeviceClient> logger,
                                 Meter meter,
-                                ITracing tracing)
+                                ITracing tracing,
+                                NetworkServerConfiguration configuration,
+                                IHttpClientFactory httpClientFactory)
         {
             if (string.IsNullOrEmpty(connectionString)) throw new ArgumentException($"'{nameof(connectionString)}' cannot be null or empty.", nameof(connectionString));
             if (meter is null) throw new ArgumentNullException(nameof(meter));
@@ -57,6 +63,8 @@ namespace LoRaWan.NetworkServer
             this.twinLoadRequests = meter.CreateCounter<int>(MetricRegistry.TwinLoadRequests);
             _ = meter.CreateObservableGauge(MetricRegistry.ActiveClientConnections, () => activeDeviceConnections);
             this.deviceClient = CreateDeviceClient();
+            this.networkServerConfiguration = configuration;
+            this.httpClientFactory = httpClientFactory;
         }
 
         public async Task<Twin> GetTwinAsync(CancellationToken cancellationToken = default)
@@ -135,6 +143,16 @@ namespace LoRaWan.NetworkServer
                 try
                 {
                     var messageJson = JsonConvert.SerializeObject(telemetry, Formatting.None);
+
+                    // Custom http sink, we are not using IoT Hub as a sink in that case
+                    if (!string.IsNullOrEmpty(this.networkServerConfiguration.CustomHttpSink))
+                    {
+                        this.logger.LogDebug($"sending message {messageJson} to custom sink hub");
+                        using var content = new StringContent(messageJson, Encoding.UTF8, "application/json");
+                        using var client = await this.httpClientFactory.CreateClient(nameof(this.networkServerConfiguration.CustomHttpSink)).PostAsync(new Uri(this.networkServerConfiguration.CustomHttpSink), content);
+                        return true;
+                    }
+
                     using var message = new Message(Encoding.UTF8.GetBytes(messageJson));
 
                     this.logger.LogDebug($"sending message {messageJson} to hub");
@@ -156,6 +174,11 @@ namespace LoRaWan.NetworkServer
                 catch (OperationCanceledException ex) when (ExceptionFilterUtility.True(() => this.logger.LogError(ex, "could not send message to IoTHub/Edge due to timeout.")))
                 {
                     // continue
+                }
+                catch (HttpRequestException)
+                {
+                    logger.LogError("An issue happened with the custom Http request sync.");
+                    // Continue
                 }
             }
 

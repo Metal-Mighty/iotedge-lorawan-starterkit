@@ -146,6 +146,11 @@ namespace LoRaWan.NetworkServer
         /// </summary>
         public bool IsLocalDevelopment { get; set; }
 
+        /// <summary>
+        /// Specifies a custom Http sink instead of IoT Hub.
+        /// </summary>
+        public string CustomHttpSink { get; private set; }
+
 
         /// <summary>
         /// Specifies the Processing Delay in Milliseconds
@@ -213,7 +218,7 @@ namespace LoRaWan.NetworkServer
             config.RedisConnectionString = envVars.GetEnvVar("REDIS_CONNECTION_STRING", string.Empty);
             if (!config.RunningAsIoTEdgeModule && !config.IsLocalDevelopment && string.IsNullOrEmpty(config.RedisConnectionString))
                 throw new InvalidOperationException("'REDIS_CONNECTION_STRING' can't be empty if running network server as part of a cloud only deployment.");
-
+            config.CustomHttpSink = envVars.GetEnvVar("CUSTOM_HTTP_SINK", string.Empty);
             return config;
         }
     }
