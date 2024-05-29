@@ -116,7 +116,8 @@ namespace LoRaWan.Tests.Unit.NetworkServer
                        NullLoggerFactory.Instance,
                        NullLogger<LoRaDeviceFactory>.Instance,
                        meter,
-                       new NoopTracing())
+                       new NoopTracing(),
+                       new MockHttpClientFactory())
             {
                 this.deviceSetup = deviceSetup;
             }

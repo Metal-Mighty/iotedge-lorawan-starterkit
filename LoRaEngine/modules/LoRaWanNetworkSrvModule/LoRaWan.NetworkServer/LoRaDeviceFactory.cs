@@ -7,6 +7,7 @@ namespace LoRaWan.NetworkServer
     using System.Threading;
     using System.Threading.Tasks;
     using System.Diagnostics.Metrics;
+    using System.Net.Http;
     using Microsoft.Azure.Devices.Client;
     using Microsoft.Extensions.Logging;
 
@@ -20,6 +21,7 @@ namespace LoRaWan.NetworkServer
         private readonly ILogger<LoRaDeviceFactory> logger;
         private readonly Meter meter;
         private readonly ITracing tracing;
+        private readonly IHttpClientFactory httpClientFactory;
 
         public LoRaDeviceFactory(NetworkServerConfiguration configuration,
                                  ILoRaDataRequestHandler dataRequestHandler,
@@ -28,7 +30,8 @@ namespace LoRaWan.NetworkServer
                                  ILoggerFactory loggerFactory,
                                  ILogger<LoRaDeviceFactory> logger,
                                  Meter meter,
-                                 ITracing tracing)
+                                 ITracing tracing,
+                                 IHttpClientFactory httpClientFactory)
         {
             this.configuration = configuration;
             this.dataRequestHandler = dataRequestHandler;
@@ -38,6 +41,7 @@ namespace LoRaWan.NetworkServer
             this.meter = meter;
             this.tracing = tracing;
             this.loRaDeviceCache = loRaDeviceCache;
+            this.httpClientFactory = httpClientFactory;
         }
 
         public Task<LoRaDevice> CreateAndRegisterAsync(IoTHubDeviceInfo deviceInfo, CancellationToken cancellationToken)
@@ -165,7 +169,7 @@ namespace LoRaWan.NetworkServer
 
                 var client = new LoRaDeviceClient(deviceId, deviceConnectionStr, transportSettings,
                                                   this.loggerFactory.CreateLogger<LoRaDeviceClient>(), this.meter,
-                                                  this.tracing);
+                                                  this.tracing, this.configuration, this.httpClientFactory);
 
                 return client.AddResiliency(this.loggerFactory);
             }

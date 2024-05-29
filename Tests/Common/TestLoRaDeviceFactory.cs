@@ -41,7 +41,8 @@ namespace LoRaWan.Tests.Common
                    NullLoggerFactory.Instance,
                    NullLogger<LoRaDeviceFactory>.Instance,
                    meter: null,
-                   new NoopTracing())
+                   new NoopTracing(),
+                   new MockHttpClientFactory())
         {
             this.loRaDeviceClient = loRaDeviceClient;
         }
