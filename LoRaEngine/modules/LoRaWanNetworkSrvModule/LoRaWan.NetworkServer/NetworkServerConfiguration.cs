@@ -215,7 +215,7 @@ namespace LoRaWan.NetworkServer
                                               ? size
                                               : throw new NotSupportedException($"'IOTHUB_CONNECTION_POOL_SIZE' needs to be between 1 and {AmqpConnectionPoolSettings.AbsoluteMaxPoolSize}.");
 
-            config.UpstreamProtocol = envVars.GetEnvVar("UPSTREAM_PROTOCOL", string.Empty)
+            config.UpstreamProtocol = envVars.GetEnvVar("UPSTREAM_PROTOCOL", "Amqp")
                 .StringToUpstreamProtocol()
                 .UpstreamProtocolToTransportType();
 
