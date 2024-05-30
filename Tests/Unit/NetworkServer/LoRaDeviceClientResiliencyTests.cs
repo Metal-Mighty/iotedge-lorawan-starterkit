@@ -13,6 +13,7 @@ namespace LoRaWan.Tests.Unit.NetworkServer
     using System.Threading.Tasks;
     using Common;
     using LoRaWan.NetworkServer;
+    using LoRaWan.NetworkServer.Extensions;
     using Microsoft.Azure.Devices.Client;
     using Microsoft.Azure.Devices.Shared;
     using Microsoft.Extensions.Logging;

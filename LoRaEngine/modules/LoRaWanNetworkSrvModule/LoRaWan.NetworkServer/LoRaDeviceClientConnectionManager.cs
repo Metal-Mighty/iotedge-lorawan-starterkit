@@ -17,6 +17,7 @@ namespace LoRaWan.NetworkServer
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using LoRaTools;
+    using LoRaWan.NetworkServer.Extensions;
 
     /// <summary>
     /// Manages <see cref="ILoRaDeviceClient"/> connections for <see cref="LoRaDevice"/>.

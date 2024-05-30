@@ -6,6 +6,7 @@
 namespace LoRaWan.NetworkServer
 {
     using LoRaTools.LoRaMessage;
+    using LoRaWan.NetworkServer.Extensions;
     using Microsoft.Extensions.Logging;
     using System;
     using System.Collections.Concurrent;

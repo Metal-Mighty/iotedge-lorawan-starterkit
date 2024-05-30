@@ -3,7 +3,7 @@
 
 #nullable enable
 
-namespace LoRaWan.NetworkServer
+namespace LoRaWan.NetworkServer.Extensions
 {
     using System;
     using System.Collections.Generic;

@@ -6,6 +6,7 @@ namespace LoRaWan.NetworkServer
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Extensions;
     using Microsoft.AspNetCore.Server.Kestrel.Https;
     using Microsoft.Azure.Devices.Client;
 
@@ -146,11 +147,15 @@ namespace LoRaWan.NetworkServer
         /// </summary>
         public bool IsLocalDevelopment { get; set; }
 
-
         /// <summary>
         /// Specifies the Processing Delay in Milliseconds
         /// </summary>
         public int ProcessingDelayInMilliseconds { get; set; } = Constants.DefaultProcessingDelayInMilliseconds;
+
+        /// <summary>
+        /// Specifies the protocol to use for communication from the Azure IoT Device to Azure
+        /// </summary>
+        public TransportType UpstreamProtocol { get; set; }
 
         // Creates a new instance of NetworkServerConfiguration by reading values from environment variables
         public static NetworkServerConfiguration CreateFromEnvironmentVariables()
@@ -209,6 +214,10 @@ namespace LoRaWan.NetworkServer
                                               && size < AmqpConnectionPoolSettings.AbsoluteMaxPoolSize
                                               ? size
                                               : throw new NotSupportedException($"'IOTHUB_CONNECTION_POOL_SIZE' needs to be between 1 and {AmqpConnectionPoolSettings.AbsoluteMaxPoolSize}.");
+
+            config.UpstreamProtocol = envVars.GetEnvVar("UPSTREAM_PROTOCOL", string.Empty)
+                .StringToUpstreamProtocol()
+                .UpstreamProtocolToTransportType();
 
             config.RedisConnectionString = envVars.GetEnvVar("REDIS_CONNECTION_STRING", string.Empty);
             if (!config.RunningAsIoTEdgeModule && !config.IsLocalDevelopment && string.IsNullOrEmpty(config.RedisConnectionString))

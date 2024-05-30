@@ -10,7 +10,7 @@ namespace LoRaWan.Tests.Unit.NetworkServer
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using LoRaWan.NetworkServer;
+    using LoRaWan.NetworkServer.Extensions;
     using Moq;
     using Xunit;
 

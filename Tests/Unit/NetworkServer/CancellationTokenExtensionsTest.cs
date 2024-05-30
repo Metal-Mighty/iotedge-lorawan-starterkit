@@ -5,7 +5,7 @@ namespace LoRaWan.Tests.Unit.NetworkServer
 {
     using System;
     using System.Threading;
-    using LoRaWan.NetworkServer;
+    using LoRaWan.NetworkServer.Extensions;
     using Xunit;
 
     public class CancellationTokenExtensionsTest

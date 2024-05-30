@@ -11,6 +11,7 @@ namespace LoRaWan.NetworkServer.BasicsStation
     using System.Threading;
     using System.Threading.Tasks;
     using LoRaTools.LoRaPhysical;
+    using LoRaWan.NetworkServer.Extensions;
     using Microsoft.Extensions.Logging;
 
     internal class DownstreamMessageSender : IDownstreamMessageSender

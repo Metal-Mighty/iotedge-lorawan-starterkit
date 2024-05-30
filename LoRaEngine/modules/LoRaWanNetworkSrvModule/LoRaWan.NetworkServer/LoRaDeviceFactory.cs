@@ -9,6 +9,7 @@ namespace LoRaWan.NetworkServer
     using System.Diagnostics.Metrics;
     using Microsoft.Azure.Devices.Client;
     using Microsoft.Extensions.Logging;
+    using LoRaWan.NetworkServer.Extensions;
 
     public class LoRaDeviceFactory : ILoRaDeviceFactory
     {
@@ -152,7 +153,7 @@ namespace LoRaWan.NetworkServer
                 // Enabling AMQP multiplexing
                 var transportSettings = new ITransportSettings[]
                 {
-                    new AmqpTransportSettings(TransportType.Amqp_Tcp_Only)
+                    new AmqpTransportSettings(this.configuration.UpstreamProtocol)
                     {
                         AmqpConnectionPoolSettings = new AmqpConnectionPoolSettings()
                         {

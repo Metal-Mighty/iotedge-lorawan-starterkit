@@ -5,7 +5,7 @@ namespace LoRaWan.Tests.Unit.NetworkServer
 {
     using System;
     using Common;
-    using LoRaWan.NetworkServer;
+    using LoRaWan.NetworkServer.Extensions;
     using Xunit;
 
     public class HexadecimalExtensionsTests

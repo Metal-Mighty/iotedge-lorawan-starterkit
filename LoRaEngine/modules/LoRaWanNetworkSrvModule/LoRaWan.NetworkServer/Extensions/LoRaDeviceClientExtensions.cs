@@ -3,8 +3,9 @@
 
 #nullable enable
 
-namespace LoRaWan.NetworkServer
+namespace LoRaWan.NetworkServer.Extensions
 {
+    using LoRaWan;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
@@ -53,8 +54,8 @@ namespace LoRaWan.NetworkServer
                     }
                     catch (Exception ex)
                         when ((ex is ObjectDisposedException
-                                  || (ex is InvalidOperationException ioe
-                                      && ioe.Message.StartsWith("This operation is only allowed using a successfully authenticated context.", StringComparison.OrdinalIgnoreCase)))
+                                  || ex is InvalidOperationException ioe
+                                      && ioe.Message.StartsWith("This operation is only allowed using a successfully authenticated context.", StringComparison.OrdinalIgnoreCase))
                               && ExceptionFilterUtility.True(() =>
                                      this.logger?.LogDebug(ex, @"Device client operation ""{Operation}"" (attempt {Attempt}/"
                                                                + MaxAttempts.ToString(CultureInfo.InvariantCulture)

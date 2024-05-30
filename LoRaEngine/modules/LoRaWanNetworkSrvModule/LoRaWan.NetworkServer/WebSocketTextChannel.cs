@@ -11,6 +11,7 @@ namespace LoRaWan.NetworkServer
     using System.Threading;
     using System.Threading.Channels;
     using System.Threading.Tasks;
+    using LoRaWan.NetworkServer.Extensions;
 
     /// <summary>
     /// A <see cref="IWebSocketWriter{T}"/> implementation for text messages that uses a queue to
