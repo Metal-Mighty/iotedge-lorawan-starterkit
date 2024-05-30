@@ -60,3 +60,4 @@ environment variables:
 | REDIS_CONNECTION_STRING | Connection string used to connect to the deployed Redis instance. | Yes |
 | FACADE_SERVER_URL | Azure Facade function url, e.g. <https://deployedfunction.azurewebsites.net/api> | Yes |
 | FACADE_AUTH_CODE | Azure Facade function auth code | Yes |
+| UPSTREAM_PROTOCOL | Protocol to be used for upstream communication. Supported values are `Amqp` and `AmqpWs` | No (defaults to `Amqp`) |
