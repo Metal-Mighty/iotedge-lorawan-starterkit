@@ -216,8 +216,8 @@ namespace LoRaWan.NetworkServer
                                               : throw new NotSupportedException($"'IOTHUB_CONNECTION_POOL_SIZE' needs to be between 1 and {AmqpConnectionPoolSettings.AbsoluteMaxPoolSize}.");
 
             config.UpstreamProtocol = envVars.GetEnvVar("UPSTREAM_PROTOCOL", "Amqp")
-                .StringToUpstreamProtocol()
-                .UpstreamProtocolToTransportType();
+                .ToUpstreamProtocol()
+                .ToTransportType();
 
             config.RedisConnectionString = envVars.GetEnvVar("REDIS_CONNECTION_STRING", string.Empty);
             if (!config.RunningAsIoTEdgeModule && !config.IsLocalDevelopment && string.IsNullOrEmpty(config.RedisConnectionString))

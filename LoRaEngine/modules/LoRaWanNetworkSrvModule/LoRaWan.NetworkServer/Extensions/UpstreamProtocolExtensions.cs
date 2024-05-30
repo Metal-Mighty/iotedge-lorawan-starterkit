@@ -8,7 +8,7 @@ using Microsoft.Azure.Devices.Client;
 
 public static class UpstreamProtocolExtensions
 {
-    public static UpstreamProtocol StringToUpstreamProtocol(this string value)
+    public static UpstreamProtocol ToUpstreamProtocol(this string value)
     {
         return Enum.TryParse(value, true, out UpstreamProtocol upstreamProtocol)
             ? throw new ArgumentOutOfRangeException(nameof(value), value,
@@ -16,7 +16,7 @@ public static class UpstreamProtocolExtensions
             : upstreamProtocol;
     }
 
-    public static TransportType UpstreamProtocolToTransportType(this UpstreamProtocol value)
+    public static TransportType ToTransportType(this UpstreamProtocol value)
     {
         return value switch
         {
